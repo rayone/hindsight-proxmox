@@ -1,0 +1,100 @@
+{
+  "name": "Hindsight",
+  "slug": "hindsight",
+  "categories": [
+    20
+  ],
+  "date_created": "2026-10-10",
+  "type": "ct",
+  "updateable": true,
+  "privileged": false,
+  "interface_port": 9999,
+  "documentation": "https://hindsight.vectorize.io/",
+  "website": "https://hindsight.vectorize.io/",
+  "repository": "https://github.com/vectorize-io/hindsight",
+  "architectures": [
+    "amd64"
+  ],
+  "platforms": [
+    "pve"
+  ],
+  "logo": "https://raw.githubusercontent.com/vectorize-io/hindsight/main/hindsight-docs/static/img/logo.png",
+  "description": "Hindsight is an agent memory server that retains, recalls and reflects on memories so AI agents learn over time. It exposes a REST and MCP API backed by PostgreSQL with pgvector, local embedding and reranking models, and a web Control Plane.",
+  "install_methods": [
+    {
+      "type": "default",
+      "script": "ct/hindsight.sh",
+      "config_path": "/opt/hindsight.env",
+      "resources": {
+        "cpu": 4,
+        "ram": 4096,
+        "hdd": 20,
+        "os": "Debian",
+        "version": "13"
+      }
+    }
+  ],
+  "default_credentials": {
+    "username": null,
+    "password": null
+  },
+  "notes": [
+    {
+      "text": "Without an LLM provider Hindsight runs in chunk-only mode (HINDSIGHT_API_LLM_PROVIDER=none): retain/recall work, fact extraction and reflect do not. Set HINDSIGHT_API_LLM_PROVIDER, HINDSIGHT_API_LLM_API_KEY and optionally HINDSIGHT_API_LLM_MODEL / HINDSIGHT_API_LLM_BASE_URL in /opt/hindsight.env, then run systemctl restart hindsight-api.",
+      "type": "info"
+    },
+    {
+      "text": "API (8888) and Control Plane (9999) have no authentication by default. Restrict them to a trusted network, or enable HINDSIGHT_API_TENANT_EXTENSION=hindsight_api.extensions.builtin.tenant:ApiKeyTenantExtension with HINDSIGHT_API_TENANT_API_KEY (pass the same key to the UI as HINDSIGHT_CP_DATAPLANE_API_KEY) and HINDSIGHT_CP_ACCESS_KEY for the UI.",
+      "type": "warning"
+    },
+    {
+      "text": "First start downloads the local embedding and reranker models (~220 MB) into /opt/hindsight_data/huggingface. Memories live in the local PostgreSQL database 'hindsight'; credentials are in ~/hindsight.creds.",
+      "type": "info"
+    },
+    {
+      "text": "amd64 only: the upstream Control Plane release bundles x64-only native image libraries.",
+      "type": "info"
+    }
+  ],
+  "app_vars": [
+    {
+      "name": "var_llm_provider",
+      "label": "LLM Provider",
+      "type": "select",
+      "options": [
+        "none",
+        "openai",
+        "anthropic",
+        "gemini",
+        "groq",
+        "openrouter",
+        "ollama",
+        "lmstudio"
+      ],
+      "default": "none",
+      "help": "none = chunk-only mode without an LLM. ollama/lmstudio need var_llm_base_url and no key"
+    },
+    {
+      "name": "var_llm_api_key",
+      "label": "LLM API Key",
+      "type": "password",
+      "secret": true,
+      "required": false,
+      "help": "Required for every provider except none, ollama and lmstudio"
+    },
+    {
+      "name": "var_llm_model",
+      "label": "LLM Model",
+      "type": "text",
+      "default": "",
+      "help": "Empty uses the provider default"
+    },
+    {
+      "name": "var_llm_base_url",
+      "label": "LLM Base URL",
+      "type": "text",
+      "default": "",
+      "help": "e.g. http://<ollama-ip>:11434/v1"
+    }
+  ]
+}
