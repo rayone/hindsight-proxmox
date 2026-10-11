@@ -75,6 +75,6 @@ description
 msg_ok "Completed Successfully!\n"
 echo -e "${CREATING}${GN}${APP} setup has been successfully initialized!${CL}"
 echo -e "${INFO}${YW}Access it using the following URL:${CL}"
-echo -e "${GATEWAY}${BGN}http://${IP}:9999${CL}"
+echo -e "${GATEWAY}${BGN}http://${IP}:8000${CL}"
 echo -e "${INFO}${YW}API (unauthenticated):${CL}"
 echo -e "${GATEWAY}${BGN}http://${IP}:8888${CL}"

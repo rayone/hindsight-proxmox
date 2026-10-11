@@ -8,7 +8,7 @@
   "type": "ct",
   "updateable": true,
   "privileged": false,
-  "interface_port": 9999,
+  "interface_port": 8000,
   "documentation": "https://hindsight.vectorize.io/",
   "website": "https://hindsight.vectorize.io/",
   "repository": "https://github.com/vectorize-io/hindsight",
@@ -44,7 +44,7 @@
       "type": "info"
     },
     {
-      "text": "API (8888) and Control Plane (9999) have no authentication by default. Restrict them to a trusted network, or enable HINDSIGHT_API_TENANT_EXTENSION=hindsight_api.extensions.builtin.tenant:ApiKeyTenantExtension with HINDSIGHT_API_TENANT_API_KEY (pass the same key to the UI as HINDSIGHT_CP_DATAPLANE_API_KEY) and HINDSIGHT_CP_ACCESS_KEY for the UI.",
+      "text": "API (8888) and Control Plane (8000) have no authentication by default. Restrict them to a trusted network, or enable HINDSIGHT_API_TENANT_EXTENSION=hindsight_api.extensions.builtin.tenant:ApiKeyTenantExtension with HINDSIGHT_API_TENANT_API_KEY (pass the same key to the UI as HINDSIGHT_CP_DATAPLANE_API_KEY) and HINDSIGHT_CP_ACCESS_KEY for the UI.",
       "type": "warning"
     },
     {

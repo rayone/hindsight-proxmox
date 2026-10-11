@@ -87,7 +87,7 @@ Type=simple
 User=root
 WorkingDirectory=/opt/hindsight-ui
 Environment=NODE_ENV=production
-ExecStart=/usr/bin/node /opt/hindsight-ui/bin/cli.js -p 9999 -H 0.0.0.0 -a http://127.0.0.1:8888
+ExecStart=/usr/bin/node /opt/hindsight-ui/bin/cli.js -p 8000 -H 0.0.0.0 -a http://127.0.0.1:8888
 Restart=on-failure
 RestartSec=5
 
