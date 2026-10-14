@@ -27,6 +27,10 @@ if [[ ! "$var_llm_provider" =~ ^(none|ollama|lmstudio)$ && -z "$var_llm_api_key"
   msg_error "Hindsight provider ${var_llm_provider} needs var_llm_api_key"
   exit 1
 fi
+if [[ "$var_llm_provider" =~ ^(ollama|lmstudio)$ && -z "$var_llm_base_url" ]]; then
+  msg_error "Hindsight provider ${var_llm_provider} needs var_llm_base_url"
+  exit 1
+fi
 
 header_info "$APP"
 variables
